@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta httpequiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1.00001, viewport-fit=cover"
+    />
+    <title>SpaceShare</title>
+    <style>
+      /* These styles make the body full-height */
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      /* These styles make the root element full-height */
+      #root {
+        display: flex;
+        height: 100%;
+      }
+      /* These styles disable body scrolling if you are using <ScrollView> */
+      body {
+        overflow: hidden;
+      }
+      /* These styles make the root element properly fill the browser window */
+      html {
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+        height: 100%;
+      }
+      /* Add loading animation */
+      .loading-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        background-color: #f7f7f7;
+      }
+      .loading-logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: #FF5A5F;
+        margin-bottom: 20px;
+      }
+      .loading-spinner {
+        width: 40px;
+        height: 40px;
+        border: 4px solid rgba(255, 90, 95, 0.3);
+        border-radius: 50%;
+        border-top-color: #FF5A5F;
+        animation: spin 1s ease-in-out infinite;
+      }
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <div class="loading-container">
+        <div class="loading-logo">SpaceShare</div>
+        <div class="loading-spinner"></div>
+      </div>
+    </div>
+    <!-- Add this script to handle web-specific issues -->
+    <script>
+      // Fix for some web compatibility issues
+      window.addEventListener('load', function() {
+        // Handle errors gracefully
+        window.onerror = function(message, source, lineno, colno, error) {
+          console.error('Error caught by window.onerror:', message, error);
+          // Prevent app from completely crashing on certain errors
+          return true;
+        };
+        
+        // Add polyfills or shims if needed
+        if (!window.requestIdleCallback) {
+          window.requestIdleCallback = function(callback) {
+            return setTimeout(function() {
+              callback({
+                didTimeout: false,
+                timeRemaining: function() {
+                  return Infinity;
+                }
+              });
+            }, 1);
+          };
+        }
+      });
+    </script>
+  </body>
+</html>
